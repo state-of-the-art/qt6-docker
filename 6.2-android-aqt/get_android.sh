@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -xe
 # Script to get android sdk & ndk
 
 [ "$SDK_URL" ]    || SDK_URL="https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip"
@@ -22,7 +22,7 @@ echo
 echo '--> Install Android SDK & NDK'
 echo
 
-apt install -y curl unzip openjdk-8-jdk-headless
+apt install -y curl unzip openjdk-11-jdk-headless
 
 echo "$SDK_SHA256 -" > sum.txt && curl -fLs "$SDK_URL" | tee /tmp/sdk-tools.zip | sha256sum -c sum.txt
 unzip -q /tmp/sdk-tools.zip -d /tmp

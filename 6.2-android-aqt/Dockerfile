@@ -6,17 +6,17 @@ MAINTAINER State Of The Art <docker@state-of-the-art.io> (@stateoftheartio)
 # PIP requirement like "aqtinstall==2.0.5" or url with egg file
 ARG AQT_VERSION="aqtinstall==2.0.5"
 
-ARG QT_VERSION=6.2.2
+ARG QT_VERSION=6.2.3
 ARG QT_PATH=/opt/Qt
 
-ARG ADDITIONAL_PACKAGES="sudo git openssh-client ca-certificates curl python3 openjdk-8-jdk-headless locales"
+ARG ADDITIONAL_PACKAGES="sudo git openssh-client ca-certificates curl python3 openjdk-11-jdk-headless locales"
 
-ARG ANDROID_NATIVE_API_LEVEL=29
+ARG ANDROID_NATIVE_API_LEVEL=30
 ARG SDK_PLATFORM=android-${ANDROID_NATIVE_API_LEVEL}
 ARG SDK_PATH=/opt/android-sdk
-ARG SDK_BUILD_TOOLS=${ANDROID_NATIVE_API_LEVEL}.0.3
+ARG SDK_BUILD_TOOLS=${ANDROID_NATIVE_API_LEVEL}.0.2
 ARG SDK_PACKAGES="platform-tools"
-ARG NDK_VERSION=21.4.7075529
+ARG NDK_VERSION=22.1.7171670
 
 ENV DEBIAN_FRONTEND=noninteractive \
     DEBCONF_NONINTERACTIVE_SEEN=true \
@@ -29,7 +29,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     ANDROID_NDK_HOST=linux-x86_64 \
     ANDROID_NDK_PLATFORM=${SDK_PLATFORM} \
     ANDROID_NATIVE_API_LEVEL=${ANDROID_NATIVE_API_LEVEL} \
-    PATH=${QT_PATH}/Tools/CMake/bin:${QT_PATH}/Tools/Ninja:${QT_PATH}/${QT_VERSION}/android_arm64_v8a/bin:${SDK_PATH}/cmdline-tools/latest/bin:${SDK_PATH}/platform-tools:$PATH
+    PATH=$PATH:${QT_PATH}/Tools/CMake/bin:${QT_PATH}/Tools/Ninja:${QT_PATH}/${QT_VERSION}/android_arm64_v8a/bin:${SDK_PATH}/cmdline-tools/latest/bin:${SDK_PATH}/platform-tools
 
 COPY get_android.sh get_qt.sh install_packages.sh /tmp/
 
