@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -xe
 
 [ "$ADDITIONAL_PACKAGES" ] || ADDITIONAL_PACKAGES='wine64'
 

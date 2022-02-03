@@ -6,7 +6,7 @@ MAINTAINER State Of The Art <docker@state-of-the-art.io> (@stateoftheartio)
 # Just version "v2.0.5" for example
 ARG AQT_VERSION="2.0.5"
 
-ARG QT_VERSION=6.2.2
+ARG QT_VERSION=6.2.3
 ARG QT_PATH=C:\\Qt
 
 ARG ADDITIONAL_PACKAGES="git openssh-client curl ca-certificates wine64"

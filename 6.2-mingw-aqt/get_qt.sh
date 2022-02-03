@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -xe
 # Script to install Qt 6 in docker container
 
 [ "$AQT_VERSION" ] || AQT_VERSION=2.0.5
@@ -69,6 +69,11 @@ EOF
 cat - <<\EOF | sudo -E tee /usr/local/bin/ninja
 #!/bin/sh
 wine ninja "$@"
+EOF
+
+cat - <<\EOF | sudo -E tee /usr/local/bin/windeployqt
+#!/bin/sh
+wine windeployqt "$@"
 EOF
 
 sudo -E chmod +x /usr/local/bin/*
