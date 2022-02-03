@@ -6,7 +6,7 @@ MAINTAINER State Of The Art <docker@state-of-the-art.io> (@stateoftheartio)
 # PIP requirement like "aqtinstall==2.0.5" or url with egg file
 ARG AQT_VERSION="aqtinstall==2.0.5"
 
-ARG QT_VERSION=6.2.2
+ARG QT_VERSION=6.2.3
 ARG QT_PATH=/opt/Qt
 
 ARG SDK_PATH=/opt/emsdk
@@ -17,8 +17,9 @@ ENV DEBIAN_FRONTEND=noninteractive \
     DEBCONF_NONINTERACTIVE_SEEN=true \
     QT_PATH=${QT_PATH} \
     QT_WASM=${QT_PATH}/${QT_VERSION}/wasm_32 \
+    EMSDK=${SDK_PATH} \
     EMSDK_NODE=${SDK_PATH}/node/14.15.5_64bit/bin/node \
-    PATH=${QT_PATH}/Tools/CMake/bin:${QT_PATH}/Tools/Ninja:${QT_PATH}/${QT_VERSION}/wasm_32/bin:${SDK_PATH}/upstream/bin:${SDK_PATH}/upstream/emscripten:${SDK_PATH}/node/14.15.5_64bit/bin:${SDK_PATH}:$PATH
+    PATH=$PATH:${QT_PATH}/Tools/CMake/bin:${QT_PATH}/Tools/Ninja:${QT_PATH}/${QT_VERSION}/wasm_32/bin:${SDK_PATH}/upstream/bin:${SDK_PATH}/upstream/emscripten:${SDK_PATH}/node/14.15.5_64bit/bin:${SDK_PATH}
 
 COPY get_emsdk.sh get_qt.sh install_packages.sh /tmp/
 

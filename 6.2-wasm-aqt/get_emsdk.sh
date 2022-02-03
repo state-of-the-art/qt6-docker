@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -xe
 # Script to get emscripten sdk
 
 [ "$SDK_VERSION" ] || SDK_VERSION=2.0.30

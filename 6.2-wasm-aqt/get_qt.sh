@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -xe
 # Script to install Qt 6 in docker container
 
 [ "$AQT_VERSION" ] || AQT_VERSION=aqtinstall
@@ -32,8 +32,21 @@ echo
 aqt install-qt -O "$QT_PATH" linux desktop "$QT_VERSION" wasm_32
 aqt install-tool -O "$QT_PATH" linux desktop tools_cmake
 aqt install-tool -O "$QT_PATH" linux desktop tools_ninja
+# Host Qt needed for cross-compilation
+aqt install-qt -O "$QT_PATH" linux desktop "$QT_VERSION" gcc_64
 
 pip3 freeze | xargs pip3 uninstall -y
+
+# Create qt-cmake wrapper to simplify the emsdk usage
+mkdir -p /usr/local/bin
+cat - <<\EOF > /usr/local/bin/qt-cmake
+#!/bin/sh -e
+
+export CMAKE_TOOLCHAIN_FILE=$QT_WASM/lib/cmake/Qt6/qt.toolchain.cmake
+exec cmake "-DQT_HOST_PATH=$(dirname "$QT_WASM")/gcc_64" "$@"
+EOF
+
+chmod +x /usr/local/bin/*
 
 echo
 echo '--> Restore the packages list to the original state'
