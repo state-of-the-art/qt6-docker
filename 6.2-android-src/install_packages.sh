@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -xe
 
 [ "$QT_PATH" ] || QT_PATH=/opt/Qt
 

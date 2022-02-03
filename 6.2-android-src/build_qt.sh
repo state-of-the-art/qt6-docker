@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -xe
 # Script to build Qt 6 in docker container
 
 [ "$QT_URL" ] || exit 1

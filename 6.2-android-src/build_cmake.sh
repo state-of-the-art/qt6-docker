@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -xe
 # Script to build cmake in docker container
 
 [ "$CMAKE_VERSION" ] || CMAKE_VERSION=3.21.3

@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -xe
 # Script to get android sdk & ndk
 
 [ "$SDK_URL" ]    || SDK_URL="https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip"
