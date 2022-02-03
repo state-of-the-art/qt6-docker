@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -xe
 # Script to install Qt 6 in docker container
 
 [ "$AQT_VERSION" ] || AQT_VERSION=aqtinstall
