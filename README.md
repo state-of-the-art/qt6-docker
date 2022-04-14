@@ -8,6 +8,12 @@ Uses great AQT tool to simplify the installation process of Qt libs: https://git
 
 Dockerhub: https://hub.docker.com/r/stateoftheartio/qt6
 
+* [6.3-gcc-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.3-gcc-aqt) - Linux GCC 64
+* [6.3-android-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.3-android-aqt) - Android Clang multiarch toolkit for x86_64, x86, armv7 and arm64_v8a arch
+* [6.3-wasm-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.3-wasm-aqt) - WebAssembly toolchain
+* [6.3-mingw-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.3-mingw-aqt) - Windows (wine) 64 MinGW toolchain
+* [6.3-macos-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.3-macos-aqt) - MacOS X osxcross toolchain for x86_64, aarch64
+
 * [6.2-gcc-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.2-gcc-aqt) - Linux GCC 64
 * [6.2-android-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.2-android-aqt) - Android Clang toolkit for x86_64, x86, armv7 and arm64_v8a arch
 * [6.2-wasm-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.2-wasm-aqt) - WebAssembly toolchain
@@ -39,7 +45,7 @@ In case you want to build in user dir - create it and mount as `-v "${PWD}/build
 
 In the project directory run:
 ```
-$ docker run -it --rm -v "${PWD}:/home/user/project:ro" stateoftheartio/qt6:6.2-gcc-aqt \
+$ docker run -it --rm -v "${PWD}:/home/user/project:ro" stateoftheartio/qt6:6.3-gcc-aqt \
     sh -c 'sudo apt update; sudo apt install -y libgl-dev libvulkan-dev;
            qt-cmake ./project -G Ninja -B ./build; cmake --build ./build;
            linuxdeploy --plugin qt -e "$(find ./build -maxdepth 1 -type f -executable)" --appdir ./build/deploy'
@@ -54,18 +60,26 @@ their github pages:
 
 In the project directory run:
 ```
-$ docker run -it --rm -v "${PWD}:/home/user/project:ro" stateoftheartio/qt6:6.2-android-aqt \
+$ docker run -it --rm -v "${PWD}:/home/user/project:ro" stateoftheartio/qt6:6.3-android-aqt \
     sh -c 'qt-cmake ./project -G Ninja -B ./build; cmake --build ./build'
 ```
 
 You can use `BUILD_ARCH=arm64_v8a` (default), `=armv7`, `=x86` or `=x86_64` during run of qt-cmake
 to produce binaries for specific architecture.
 
+Since Qt 6.3 android supports multi-abi, please check how to use it, but in general you can:
+```
+$ docker run -it --rm -v "${PWD}:/home/user/project:ro" stateoftheartio/qt6:6.3-android-aqt \
+    sh -c 'qt-cmake ./project -G Ninja -B ./build -DQT_ANDROID_ABIS="armeabi-v7a;arm64-v8a"; \
+           cmake --build ./build'
+```
+Or to build all the available ABIs use `-DQT_ANDROID_BUILD_ALL_ABIS=ON`.
+
 ### WebAssembly emsdk:
 
 In the project directory run:
 ```
-$ docker run -it --rm -v "${PWD}:/home/user/project:ro" stateoftheartio/qt6:6.2-wasm-aqt \
+$ docker run -it --rm -v "${PWD}:/home/user/project:ro" stateoftheartio/qt6:6.3-wasm-aqt \
     sh -c 'qt-cmake ./src -G Ninja -B ./build; cmake --build ./build'
 ```
 
@@ -76,7 +90,7 @@ running well.
 
 In the project directory run:
 ```
-$ docker run -it --rm -v "${PWD}:/home/user/project:ro" stateoftheartio/qt6:6.2-mingw-aqt \
+$ docker run -it --rm -v "${PWD}:/home/user/project:ro" stateoftheartio/qt6:6.3-mingw-aqt \
     sh -c 'qt-cmake ./src -G Ninja -B ./build; cmake --build ./build;
            windeployqt --qmldir ./src --dir build/deploy --libdir build/deploy/libs --plugindir build/deploy/plugins build/*.exe'
 ```
@@ -88,7 +102,7 @@ You can use your own applications, but know that by default there is no wine32 s
 
 In the project directory run:
 ```
-$ docker run -it --rm -v "${PWD}:/home/user/project:ro" stateoftheartio/qt6:6.2-macos-aqt \
+$ docker run -it --rm -v "${PWD}:/home/user/project:ro" stateoftheartio/qt6:6.3-macos-aqt \
     sh -c 'qt-cmake ./project -G Ninja -B ./build; cmake --build ./build;
            macdeployqt ./build/*.app -verbose=1 -dmg -qmldir=./project'
 ```
