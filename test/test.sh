@@ -3,7 +3,11 @@
 
 test_dir="$(dirname "$0")"
 IMAGES="$@"
-[ "$IMAGES" ] || IMAGES=$(find "$test_dir/.." -name '6.2-*-aqt' -printf "%f\n")
+if [ "x$IMAGES" = 'x' ]; then
+    # Use latest images
+    version=$(find "$test_dir/.." -name "*-aqt" -printf "%f\n" | sort -n | tail -1 | cut -d- -f 1)
+    IMAGES=$(find "$test_dir/.." -name "$version-*-aqt" -printf "%f\n")
+fi
 
 echo 'Running tests for:'
 echo "$IMAGES"
