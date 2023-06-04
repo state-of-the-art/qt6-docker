@@ -11,6 +11,7 @@ Dockerhub: https://hub.docker.com/r/stateoftheartio/qt6
 * [6.5-gcc-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.5-gcc-aqt) - Linux GCC 64
 * [6.5-android-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.5-android-aqt) - Android Clang multiarch toolkit for x86_64, x86, armv7 and arm64_v8a arch
 * [6.5-wasm-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.5-wasm-aqt) - WebAssembly toolchain
+* [6.5-mingw-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.5-mingw-aqt) - Windows (wine) 64 MinGW toolchain
 * [6.5-macos-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.5-macos-aqt) - MacOS X osxcross toolchain for x86_64, aarch64
 
 * [6.4-gcc-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.4-gcc-aqt) - Linux GCC 64
