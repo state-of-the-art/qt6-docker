@@ -17,6 +17,7 @@ ARG SDK_PATH=/opt/android-sdk
 ARG SDK_BUILD_TOOLS=${ANDROID_NATIVE_API_LEVEL}.0.0
 ARG SDK_PACKAGES="platform-tools"
 ARG NDK_VERSION=25.1.8937393
+ARG SDK_CMDTOOLS_VERSION=10.0
 
 ENV DEBIAN_FRONTEND=noninteractive \
     DEBCONF_NONINTERACTIVE_SEEN=true \
@@ -29,7 +30,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     ANDROID_NDK_HOST=linux-x86_64 \
     ANDROID_NDK_PLATFORM=${SDK_PLATFORM} \
     ANDROID_NATIVE_API_LEVEL=${ANDROID_NATIVE_API_LEVEL} \
-    PATH=$PATH:${QT_PATH}/Tools/CMake/bin:${QT_PATH}/Tools/Ninja:${QT_PATH}/${QT_VERSION}/android_arm64_v8a/bin:${SDK_PATH}/cmdline-tools/latest/bin:${SDK_PATH}/platform-tools
+    PATH=$PATH:${QT_PATH}/Tools/CMake/bin:${QT_PATH}/Tools/Ninja:${QT_PATH}/${QT_VERSION}/android_arm64_v8a/bin:${SDK_PATH}/cmdline-tools/${SDK_CMDTOOLS_VERSION}/bin:${SDK_PATH}/platform-tools
 
 COPY get_android.sh get_qt.sh install_packages.sh /tmp/
 

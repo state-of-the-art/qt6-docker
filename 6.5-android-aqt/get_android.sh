@@ -27,7 +27,7 @@ apt install -y curl unzip openjdk-11-jdk-headless
 echo "$SDK_SHA256 -" > sum.txt && curl -fLs "$SDK_URL" | tee /tmp/sdk-tools.zip | sha256sum -c sum.txt
 unzip -q /tmp/sdk-tools.zip -d /tmp
 rm -f /tmp/sdk-tools.zip
-yes | /tmp/cmdline-tools/bin/sdkmanager --install --verbose --sdk_root="$SDK_PATH" "cmdline-tools;latest"
+yes | /tmp/cmdline-tools/bin/sdkmanager --install --verbose --sdk_root="$SDK_PATH" "cmdline-tools;${SDK_CMDTOOLS_VERSION}"
 rm -rf /tmp/cmdline-tools
 sdkmanager --install --verbose "platforms;${SDK_PLATFORM}" "ndk;${NDK_VERSION}" "build-tools;${SDK_BUILD_TOOLS}" ${SDK_PACKAGES}
 
