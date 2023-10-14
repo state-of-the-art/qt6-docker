@@ -8,6 +8,12 @@ Uses great AQT tool to simplify the installation process of Qt libs: https://git
 
 Dockerhub: https://hub.docker.com/r/stateoftheartio/qt6
 
+* [6.6-gcc-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.6-gcc-aqt) - Linux GCC 64
+* [6.6-android-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.6-android-aqt) - Android Clang multiarch toolkit for x86_64, x86, armv7 and arm64_v8a arch
+* [6.6-wasm-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.6-wasm-aqt) - WebAssembly toolchain
+* [6.6-mingw-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.6-mingw-aqt) - Windows (wine) 64 MinGW toolchain
+* [6.6-macos-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.6-macos-aqt) - MacOS X osxcross toolchain for x86_64, aarch64
+
 * [6.5-gcc-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.5-gcc-aqt) - Linux GCC 64
 * [6.5-android-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.5-android-aqt) - Android Clang multiarch toolkit for x86_64, x86, armv7 and arm64_v8a arch
 * [6.5-wasm-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.5-wasm-aqt) - WebAssembly toolchain
