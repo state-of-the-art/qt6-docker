@@ -8,13 +8,15 @@ ARG AQT_VERSION="aqtinstall==3.1.7"
 ARG OSXCROSS_URL=https://github.com/tpoechtrager/osxcross/archive/50e86ebca7d14372febd0af8cd098705049161b9.tar.gz
 ARG OSXCROSS_SHA256=d0496d5874a3252c4df7ce24bd724e453f85c513505b970e039fd01638fc1ff7
 
-ARG QT_VERSION=6.6.0
+ARG QT_VERSION=6.6.1
 ARG QT_PATH=/opt/Qt
 
 ARG ADDITIONAL_PACKAGES="sudo git openssh-client ca-certificates curl python3 locales clang genisoimage"
 
 ENV DEBIAN_FRONTEND=noninteractive \
     DEBCONF_NONINTERACTIVE_SEEN=true \
+    QT_VERSION=${QT_VERSION} \
+    AQT_VERSION=${AQT_VERSION} \
     QT_PATH=${QT_PATH} \
     QT_MACOS=${QT_PATH}/${QT_VERSION}/macos \
     PATH=$PATH:${QT_PATH}/Tools/CMake/bin:${QT_PATH}/Tools/Ninja:${QT_PATH}/${QT_VERSION}/macos/bin:/opt/osxcross/bin

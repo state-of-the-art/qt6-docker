@@ -6,7 +6,7 @@ MAINTAINER State Of The Art <docker@state-of-the-art.io> (@stateoftheartio)
 # PIP requirement like "aqtinstall==2.0.6" or url with egg file
 ARG AQT_VERSION="aqtinstall==3.1.7"
 
-ARG QT_VERSION=6.6.0
+ARG QT_VERSION=6.6.1
 # ARG LINUXDEPLOY_COMMIT= # Jul 13, 2023
 # ARG LINUXDEPLOY_QT_COMMIT= # May 25, 2023
 ARG QT_PATH=/opt/Qt
@@ -15,6 +15,8 @@ ARG ADDITIONAL_PACKAGES="sudo git openssh-client ca-certificates build-essential
 
 ENV DEBIAN_FRONTEND=noninteractive \
     DEBCONF_NONINTERACTIVE_SEEN=true \
+    QT_VERSION=${QT_VERSION} \
+    AQT_VERSION=${AQT_VERSION} \
     QT_PATH=${QT_PATH} \
     QT_GCC=${QT_PATH}/${QT_VERSION}/gcc_64 \
     PATH=${QT_PATH}/Tools/CMake/bin:${QT_PATH}/Tools/Ninja:${QT_PATH}/${QT_VERSION}/gcc_64/bin:$PATH

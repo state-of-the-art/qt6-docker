@@ -7,13 +7,16 @@ MAINTAINER State Of The Art <docker@state-of-the-art.io> (@stateoftheartio)
 ARG AQT_VERSION=3.1.7
 ARG AQT_SHA256=b6ca0afb5e54e692b63a24e3db98bbac34927545e867c51ba71a4ea84eeae446
 
-ARG QT_VERSION=6.6.0
+ARG QT_VERSION=6.6.1
 ARG QT_PATH=C:\\Qt
 
 ARG ADDITIONAL_PACKAGES="git openssh-client curl ca-certificates wine64"
 
 ENV DEBIAN_FRONTEND=noninteractive \
     DEBCONF_NONINTERACTIVE_SEEN=true \
+    QT_VERSION=${QT_VERSION} \
+    AQT_VERSION=${AQT_VERSION} \
+    AQT_SHA256=${AQT_SHA256} \
     QT_PATH=${QT_PATH} \
     WINEDEBUG=-all
 
