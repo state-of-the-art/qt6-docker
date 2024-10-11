@@ -1,12 +1,12 @@
-# Image: stateoftheartio/qt6:6.7-android-aqt
+# Image: stateoftheartio/qt6:6.8-android-aqt
 
 FROM ubuntu:20.04
 MAINTAINER State Of The Art <docker@state-of-the-art.io> (@stateoftheartio)
 
 # PIP requirement like "aqtinstall==2.0.6" or url with egg file
-ARG AQT_VERSION="aqtinstall==3.1.16"
+ARG AQT_VERSION="aqtinstall==3.1.18"
 
-ARG QT_VERSION=6.7.1
+ARG QT_VERSION=6.8.0
 ARG QT_PATH=/opt/Qt
 
 ARG ADDITIONAL_PACKAGES="sudo git openssh-client ca-certificates curl python3 openjdk-17-jdk-headless locales"

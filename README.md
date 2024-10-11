@@ -8,6 +8,9 @@ Uses great AQT tool to simplify the installation process of Qt libs: https://git
 
 Dockerhub: https://hub.docker.com/r/stateoftheartio/qt6
 
+* [6.8-gcc-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.8-gcc-aqt) - Linux GCC 64
+* [6.8-android-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.8-android-aqt) - Android Clang multiarch toolkit for x86_64, x86, armv7 and arm64_v8a arch
+
 * [6.7-gcc-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.7-gcc-aqt) - Linux GCC 64
 * [6.7-android-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.7-android-aqt) - Android Clang multiarch toolkit for x86_64, x86, armv7 and arm64_v8a arch
 * [6.7-mingw-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.7-mingw-aqt) - Windows (wine) 64 MinGW toolchain

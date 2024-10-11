@@ -1,4 +1,4 @@
-# Image: stateoftheartio/qt6:6.6-mingw-aqt
+# Image: stateoftheartio/qt6:6.7-mingw-aqt
 
 FROM ubuntu:20.04
 MAINTAINER State Of The Art <docker@state-of-the-art.io> (@stateoftheartio)

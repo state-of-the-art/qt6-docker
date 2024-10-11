@@ -1,16 +1,16 @@
-# Image: stateoftheartio/qt6:6.7-gcc-aqt
+# Image: stateoftheartio/qt6:6.8-gcc-aqt
 
 FROM ubuntu:20.04
 MAINTAINER State Of The Art <docker@state-of-the-art.io> (@stateoftheartio)
 
 # PIP requirement like "aqtinstall==2.0.6" or url with egg file
-ARG AQT_VERSION="aqtinstall==3.1.13"
+ARG AQT_VERSION="aqtinstall==3.1.18"
 
-ARG QT_VERSION=6.7.0
-# LINUXDEPLOY_COMMIT Jan 3, 2024
-ARG LINUXDEPLOY_COMMIT=2b73a2173f8acfc0269e681bdb28ebf65b0b4b48
-# LINUXDEPLOY_QT_COMMIT Apr 25, 2024
-ARG LINUXDEPLOY_QT_COMMIT=0e7e8ce889c1105373e88e409ea555058673bb1e
+ARG QT_VERSION=6.8.0
+# LINUXDEPLOY_COMMIT Aug 7, 2024
+ARG LINUXDEPLOY_COMMIT=f6730d2fbacd9005dd9640ea517771f7597eec73
+# LINUXDEPLOY_QT_COMMIT Sep 19, 2024
+ARG LINUXDEPLOY_QT_COMMIT=70b466586a3a311d0319ff687c3d14bbd73373db
 ARG QT_PATH=/opt/Qt
 
 ARG ADDITIONAL_PACKAGES="sudo git openssh-client ca-certificates build-essential curl python3 locales patchelf"
