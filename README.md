@@ -4,13 +4,21 @@ The unified way to build your Qt application. This is a collection of the linux 
 for your CI. Supports native, Android, Windows and MacOS. Primarily it's aimed for Qt, but you can
 use it with any cmake project and cross-compile anything you want in a number of easy steps.
 
+**WARNING!**: The images are designed to be minimal and does not contain all the dev libraries, so
+if the project needs some of such dependencies, you can build a new image on top of the base one or
+install the deps dynamically during the build.
+
 Uses great AQT tool to simplify the installation process of Qt libs: https://github.com/miurahr/aqtinstall
 
 Dockerhub: https://hub.docker.com/r/stateoftheartio/qt6
 
+* [6.10-gcc-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.10-gcc-aqt) - Linux GCC 64
+* [6.10-android-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.10-android-aqt) - Android Clang multiarch toolkit for x86_64, x86, armv7 and arm64_v8a arch
+
 * [6.8-gcc-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.8-gcc-aqt) - Linux GCC 64
 * [6.8-android-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.8-android-aqt) - Android Clang multiarch toolkit for x86_64, x86, armv7 and arm64_v8a arch
 * [6.8-wasm-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.8-wasm-aqt) - WebAssembly toolchain
+* [6.8-mingw-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.8-mingw-aqt) - Windows (wine) 64 MinGW toolchain
 * [6.8-macos-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.8-macos-aqt) - MacOS X osxcross toolchain for x86_64, aarch64 (+arm64e but no Qt support)
 
 * [6.7-gcc-aqt](https://hub.docker.com/r/stateoftheartio/qt6/tags?page=1&name=6.7-gcc-aqt) - Linux GCC 64
@@ -52,7 +60,7 @@ Dockerhub: https://hub.docker.com/r/stateoftheartio/qt6
 
 ## How to build the image
 
-Just go into the required directory and run:
+Just go into the required version directory and run:
 ```
 docker build --pull --force-rm=true -t stateoftheartio/qt6:$(basename "${PWD}") .
 ```
@@ -62,10 +70,63 @@ docker build --pull --force-rm=true -t stateoftheartio/qt6:$(basename "${PWD}") 
 You can test the particular image or all of them using `test/test.sh` script - it will run the
 defined commands to make sure the image works as expected on a number of sample Qt projects.
 
-## How to use
+## How to use (>=6.10)
 
-The images are not containing the dev libraries, so if the project needs some of such dependencies,
-you can build a new image on top of the base one or install the deps dynamically during the build.
+In images 6.10 we switched to more user-friendly approach, which allows to pick your user ID and
+directory for building, so it reflects the host location and the host tooling is able to figure
+out the proper locations. Also the iamges now delivered with root user by default and pre-installed
+aqt binary for easier additions, although it's still recommended to use non-privileged user to run
+the workflows.
+
+For complex builds it's recommended to build your own local image with required dependencies, so
+they are cached and not bothering the remote services too much.
+
+### Linux GCC:
+
+In the project directory run:
+```
+mkdir -p build result
+$ docker run -i --rm \
+        --user "$(id -u):$(id -g)" \
+        -v "${PWD}:${PWD}:ro" -v "${PWD}/build:${PWD}/build:rw" -v "${PWD}/result:${PWD}/result:rw" -w "${PWD}" \
+        stateoftheartio/qt6:6.10-gcc-aqt \
+    sh -c 'sudo apt update; sudo apt install -y libgl-dev libvulkan-dev;
+           aqt install-qt -O "$QT_PATH" linux desktop "$QT_VERSION" linux_gcc_64 -m qtgrpc;
+           qt-cmake . -G Ninja -B ./build; cmake --build ./build;
+           cd ./result
+           linuxdeploy --plugin qt -e "$(find ../build -maxdepth 1 -type f -executable)" --appdir ../build/deploy'
+```
+
+For deploy it uses linuxdeploy and linuxdeploy-plugin-qt, so you can check their capabilities on
+their github pages:
+* https://github.com/linuxdeploy/linuxdeploy
+* https://github.com/linuxdeploy/linuxdeploy-plugin-qt
+
+### Android clang:
+
+In the project directory run:
+```
+mkdir -p build
+$ docker run -i --rm \
+        --user "$(id -u):$(id -g)" \
+        -v "${PWD}:${PWD}:ro" -v "${PWD}/build:${PWD}/build:rw" -w "${PWD}" \
+        stateoftheartio/qt6:6.10-android-aqt \
+    sh -c 'sudo aqt install-qt -O "$QT_PATH" linux android "$QT_VERSION" android_arm64_v8a -m qtgrpc;
+           qt-cmake . -G Ninja -B ./build; cmake --build ./build'
+```
+
+You can use `BUILD_ARCH=arm64_v8a` (default), `=armv7`, `=x86` or `=x86_64` during run of qt-cmake
+to produce binaries for specific architecture.
+
+Since Qt 6.3 android supports multi-abi, please check how to use it, but in general you can:
+```
+$ docker run -it --rm -v "${PWD}:/home/user/project:ro" stateoftheartio/qt6:6.3-android-aqt \
+    sh -c 'qt-cmake ./project -G Ninja -B ./build -DQT_ANDROID_ABIS="armeabi-v7a;arm64-v8a"; \
+           cmake --build ./build'
+```
+Or to build all the available ABIs use `-DQT_ANDROID_BUILD_ALL_ABIS=ON`.
+
+## How to use (<6.10)
 
 In case you want to build in user dir - create it and mount as `-v "${PWD}/build:/home/user/build:rw"`.
 
